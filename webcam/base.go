@@ -50,4 +50,12 @@ func ShowImage(img *opencv.IplImage, win *opencv.Window) error {
 	return nil
 }
 
-//opencv.SaveImage("/tmp/img.png", img, 0644)
+func QuickPic(camera *opencv.Capture, pic string) {
+	for {
+		if camera.GrabFrame() {
+			img := camera.RetrieveFrame(1)
+			opencv.SaveImage(pic, img, 0644)
+			return
+		}
+	}
+}
